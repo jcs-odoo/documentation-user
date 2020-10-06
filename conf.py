@@ -30,7 +30,7 @@ sys.path.insert(
 extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.todo',
-    'odoo',
+    'odoo_ext',
     'demo_link',
     'embedded_video',
     'github_link',
@@ -114,7 +114,7 @@ pygments_style = 'odoo'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'odoo'
+html_theme = 'odoo_ext'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
