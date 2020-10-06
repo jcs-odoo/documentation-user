@@ -6,8 +6,10 @@ Odoo User Documentation
 
 .. toctree::
     :titlesonly:
+    :maxdepth: 1
 
-    Index <self>
-    applications
-    practical
-    business
+    user/index
+    developer/index
+
+.. todo:: legal
+.. todo:: Odoo sh ?
