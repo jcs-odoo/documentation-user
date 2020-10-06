@@ -13,6 +13,7 @@ from docutils import nodes, utils
 from docutils.parsers.rst import Directive, directives
 from docutils.parsers.rst.directives.body import LineBlock
 
+import sphinx
 import sphinx.roles
 from sphinx.domains import Domain
 

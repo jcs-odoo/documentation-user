@@ -22,7 +22,7 @@ Notes
 
 * provided ``linkcode_resolve`` only supports Python domain
 * generates https github links
-* explicitly imports ``openerp``, so useless for anyone else
+* explicitly imports ``odoo``, so useless for anyone else
 """
 
 def setup(app):
@@ -63,9 +63,9 @@ def setup(app):
             # obj doesn't have a module, or something
             return None
 
-        import openerp
+        import odoo
         # FIXME: make finding project root project-independent
-        project_root = os.path.join(os.path.dirname(openerp.__file__), '..')
+        project_root = os.path.join(os.path.dirname(odoo.__file__), '..')
         return make_github_link(
             app,
             os.path.relpath(obj_source_path, project_root),
@@ -101,6 +101,6 @@ def add_doc_link(app, pagename, templatename, context, doctree):
     source_suffix = app.config.source_suffix
     source_suffix = next(iter(source_suffix))
     # FIXME: odoo/odoo has a doc/ prefix which is incorrect for this
-    # project, how to unify? Add new setting? 
+    # project, how to unify? Add new setting?
     context['github_link'] = lambda mode='edit': make_github_link(
         app, '%s%s' % (pagename, source_suffix), mode=mode)

@@ -19,7 +19,11 @@ def setup(app):
         if getattr(app.config, 'html_translator_class', None):
             app.warn("Overriding the explicitly set  html_translator_class setting",
                      location="odoo extension")
-        app.config.html_translator_class = 'odoo.translator.BootstrapTranslator'
+        app.config.html_translator_class = 'odoo_ext.translator.BootstrapTranslator'
+
+    add_js_file = getattr(app, 'add_js_file', None) or app.add_javascript
+    for f in ['jquery.min.js', 'bootstrap.js', 'doc.js', 'jquery.noconflict.js']:
+        add_js_file(f)
 
     switcher.setup(app)
     app.add_config_value('odoo_cover_default', None, 'env')
@@ -28,9 +32,9 @@ def setup(app):
     app.connect('html-page-context', update_meta)
 
 def update_meta(app, pagename, templatename, context, doctree):
-    if not context.get('meta'):  # context['meta'] can be None
-        context['meta'] = {}
-    meta = context.setdefault('meta', {})  # we want {} by default
+    meta = context.get('meta')
+    if meta is None:
+        meta = context['meta'] = {}
     meta.setdefault('banner', app.config.odoo_cover_default)
 
 def navbarify(node, navbar=None):
