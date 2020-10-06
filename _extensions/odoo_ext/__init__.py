@@ -109,7 +109,7 @@ if toctree:
     # than functions on the BuildEnv & al
     @monkey(toctree.TocTree)
     def resolve(old_resolve, tree, docname, *args, **kwargs):
-        if docname == tree.env.config.master_doc:
+        if docname == "user/index":
             return resolve_content_toctree(tree.env, docname, *args, **kwargs)
         toc = old_resolve(tree, docname, *args, **kwargs)
         if toc is None:
