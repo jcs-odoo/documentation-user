@@ -1,6 +1,10 @@
-=======================
-Odoo User Documentation
-=======================
+:main-title: User Documentation
+:banners-display:
+:main-toc:
+
+==================
+User Documentation
+==================
 
 .. rst-class:: index-tree
 

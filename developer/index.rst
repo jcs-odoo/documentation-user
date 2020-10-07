@@ -1,9 +1,10 @@
 :main-title: Developer Documentation
 :banner: banners/index.jpg
+:main-toc:
 
-=====
-Index
-=====
+=======================
+Developer Documentation
+=======================
 
 .. todo:: what's the documentation's license?
 

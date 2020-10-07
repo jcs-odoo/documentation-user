@@ -1,0 +1,20 @@
+{# warning: if doc structure change, these rules may have to change as well #}
+
+{# =====  VARIABLES  ====== #}
+{% set master_doc_short_name = 'Documentation' %}
+<!-- VFE TODO use value from config ? -->
+
+{% if pagename == master_doc %}
+    <li><a href="{{ pathto(master_doc) }}" class="active">{{ master_doc_short_name }}</a></li>
+{% else %}
+    {# Do not show main TOC link when in user/dev doc subpages to shorten breadcrumb links #}
+    {% if 'main-toc' in meta %}
+        <li><a href="{{ pathto(master_doc) }}">{{ master_doc_short_name }}</a></li>
+    {% endif %}
+    {% for parent in parents %}
+        <li><a href="{{ parent.link|e }}">{{ parent.title }}</a></li>
+    {% endfor %}
+    <li class="active"><a href="#">{{ meta.get('main-title', title) }}</a></li>
+{% endif %}
+
+<!-- VFE TODO integrate "next" page logic to allow better navigation -->
