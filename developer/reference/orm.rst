@@ -1030,21 +1030,40 @@ model using the existing one (provided via
 :attr:`~odoo.models.Model._inherit`) as a base. The new model gets all the
 fields, methods and meta-information (defaults & al) from its base.
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/inheritance.py
-    :language: python
-    :lines: 5-
+.. code-block:: python3
 
-and using them:
+    class Inheritance0(models.Model):
+        _name = 'inheritance.0'
+        _description = 'Inheritance Zero'
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_inheritance.py
-    :language: python
-    :lines: 10,11,14,19
+        name = fields.Char()
 
-will yield:
+        def call(self):
+            return self.check("model 0")
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_inheritance.py
-    :language: text
-    :lines: 16,21
+        def check(self, s):
+            return "This is {} record {}".format(s, self.name)
+
+    class Inheritance1(models.Model):
+        _name = 'inheritance.1'
+        _inherit = 'inheritance.0'
+        _description = 'Inheritance One'
+
+        def call(self):
+            return self.check("model 1")
+
+and using them::
+
+    a = env['inheritance.0'].create({'name': 'A'})
+    b = env['inheritance.1'].create({'name': 'B'})
+
+    a.call()
+    b.call()
+
+will yield::
+
+    "This is model 0 record A"
+    "This is model 1 record B"
 
 the second model has inherited from the first model's ``check`` method and its
 ``name`` field, but overridden the ``call`` method, as when using standard
@@ -1057,26 +1076,27 @@ When using :attr:`~odoo.models.Model._inherit` but leaving out
 :attr:`~odoo.models.Model._name`, the new model replaces the existing one,
 essentially extending it in-place. This is useful to add new fields or methods
 to existing models (created in other modules), or to customize or reconfigure
-them (e.g. to change their default sort order):
+them (e.g. to change their default sort order)::
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/extension.py
-    :language: python
-    :lines: 7-
+    class Extension0(models.Model):
+        _name = 'extension.0'
+        _description = 'Extension zero'
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_extension.py
-    :language: python
-    :lines: 10,15
+        name = fields.Char(default="A")
 
-will yield:
+    class Extension1(models.Model):
+        _inherit = 'extension.0'
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_extension.py
-    :language: text
-    :lines: 13
+        description = fields.Char(default="Extended")
 
-.. note::
+.. code-block:: python3
 
-    It will also yield the various :ref:`automatic fields
-    <reference/orm/model/automatic>` unless they've been disabled
+    record = env['extension.0'].create({})
+    record.read()[0]
+
+will yield::
+
+    {'name': "A", 'description': "Extended"}
 
 Delegation
 ----------
@@ -1086,27 +1106,58 @@ at runtime) but less power: using the :attr:`~odoo.models.Model._inherits`
 a model *delegates* the lookup of any field not found on the current model
 to "children" models. The delegation is performed via
 :class:`~odoo.fields.Reference` fields automatically set up on the parent
-model:
+model.
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/delegation.py
-    :language: python
-    :lines: 5-
+The main difference is in the meaning. When using Delegation, the model
+**has one** instead of **is one**, turning the relationship in a composition
+instead of inheritance::
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_delegation.py
-    :language: python
-    :lines: 11-14,23,28
+    class Screen(models.Model):
+        _name = 'delegation.screen'
+        _description = 'Screen'
 
-will result in:
+        size = fields.Float(string='Screen Size in inches')
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_delegation.py
-    :language: text
-    :lines: 25,30
+    class Keyboard(models.Model):
+        _name = 'delegation.keyboard'
+        _description = 'Keyboard'
 
-and it's possible to write directly on the delegated field:
+        layout = fields.Char(string='Layout')
 
-.. literalinclude:: ../../odoo/addons/test_documentation_examples/tests/test_delegation.py
-    :language: python
-    :lines: 45
+    class Laptop(models.Model):
+        _name = 'delegation.laptop'
+        _description = 'Laptop'
+
+        _inherits = {
+            'delegation.screen': 'screen_id',
+            'delegation.keyboard': 'keyboard_id',
+        }
+
+        name = fields.Char(string='Name')
+        maker = fields.Char(string='Maker')
+
+        # a Laptop has a screen
+        screen_id = fields.Many2one('delegation.screen', required=True, ondelete="cascade")
+        # a Laptop has a keyboard
+        keyboard_id = fields.Many2one('delegation.keyboard', required=True, ondelete="cascade")
+
+.. code-block:: python3
+
+    record = env['delegation.laptop'].create({
+        'screen_id': env['delegation.screen'].create({'size': 13.0}).id,
+        'keyboard_id': env['delegation.keyboard'].create({'layout': 'QWERTY'}).id,
+    })
+    record.size
+    record.layout
+
+will result in::
+
+    13.0
+    'QWERTY'
+
+and it's possible to write directly on the delegated field::
+
+    record.write({'size': 14.0})
 
 .. warning:: when using delegation inheritance, methods are *not* inherited,
              only fields
