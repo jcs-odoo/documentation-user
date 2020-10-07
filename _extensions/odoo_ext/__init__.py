@@ -43,6 +43,7 @@ def navbarify(node, navbar=None):
     :param navbar: Whether this toctree is a 'main' navbar, a 'side' navbar or
                    not a navbar at all
     """
+    # VFE TODO ask xmo, I don't get what the navbar does ...
     if navbar == 'main':
         # add classes to just toplevel
         node['classes'].extend(['nav', 'navbar-nav', 'navbar-right'])
@@ -124,6 +125,8 @@ def resolve_toctree(old_resolve, self, docname, *args, **kwargs):
     """ If navbar, bootstrapify TOC to yield a navbar
 
     """
+    # VFE NOTE not called since sphinx 1.6
+    # bump the version and remove ?
     navbar = kwargs.pop('navbar', None)
     if docname == self.config.master_doc and not navbar:
         return resolve_content_toctree(self, docname, *args, **kwargs)
