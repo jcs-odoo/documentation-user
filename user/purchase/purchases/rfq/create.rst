@@ -25,12 +25,6 @@ Select your supplier in the **Vendor** menu, or create it on-the-fly by
 clicking on **Create and Edit**. In the **Order Date** field, select
 the date to which you wish to proceed to the actual order.
 
-.. demo:fields:: purchase.purchase_rfq
-
-.. demo:action:: purchase.purchase_rfq
-
-   View *Request for Quotation* in our Online Demonstration
-
 In **Products**, click on Add an item. Select the product you wish to order
 in the **Product** menu. Specify the **Quantity** by inserting the
 number and selecting the unit of measure. In the **Unit Price** field,

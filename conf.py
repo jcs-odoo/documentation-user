@@ -31,7 +31,6 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.todo',
     'odoo_ext',
-    'demo_link',
     'embedded_video',
     'github_link',
     'html_domain',

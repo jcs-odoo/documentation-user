@@ -73,12 +73,6 @@ and validate the payment dialog.
 
 Explanation of the fields of the payment screen:
 
-.. demo:fields:: account.action_account_payments
-
-.. demo:action:: account.action_account_payments
-	
-	Try paying a supplier bill with a check
-
 .. _PrintChecks:
 
 Print checks
