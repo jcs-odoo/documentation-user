@@ -5,12 +5,12 @@ Practical Information
 .. toctree::
    :titlesonly:
 
-   getting_started/documentation
-   odoo_sh/documentation
-   db_management/documentation
-   db_management/db_online
-   db_management/db_premise
-   portal/my_odoo_portal
-   support
-   legal
-   contributing
+   practical/getting_started/documentation
+   practical/odoo_sh/documentation
+   practical/db_management/documentation
+   practical/db_management/db_online
+   practical/db_management/db_premise
+   practical/portal/my_odoo_portal
+   practical/support
+   practical/legal
+   practical/contributing/documentation

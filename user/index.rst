@@ -11,6 +11,6 @@ User Documentation
 .. toctree::
     :titlesonly:
 
-    applications
+    applications/index
     practical
     business
