@@ -73,17 +73,18 @@
         // ======= Affix =================
         // ===============================
         function set_affix() {
-            var aside_offset_top = $aside.offset().top - sub_nav_h,
-                aside_offset_bot = parseInt($wrap.css('padding-bottom')),
-                aside_width = $aside.width();
+            return;
+            // var aside_offset_top = $aside.offset().top - sub_nav_h,
+            //     aside_offset_bot = parseInt($wrap.css('padding-bottom')),
+            //     aside_width = $aside.width();
 
-            $aside.css('height', main_h);
-            $aside_nav.css('width', aside_width).affix({
-                offset: {
-                    top: aside_offset_top,
-                    bottom: aside_offset_bot,
-                }
-            });
+            // $aside.css('height', main_h);
+            // $aside_nav.css('width', aside_width).affix({
+            //     offset: {
+            //         top: aside_offset_top,
+            //         bottom: aside_offset_bot,
+            //     }
+            // });
         }
 
         // ======= Footer animations =====
