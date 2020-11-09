@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
-import sys, os
+from pygments.lexers.web import PhpLexer
+from sphinx.highlighting import lexers
+import sys
+import os
 import sphinx
+
+# monkeypatch PHP lexer to not require <?php
+lexers['php'] = PhpLexer(startinline=True)
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 DIR = os.path.dirname(__file__)
-sys.path.insert(0,
-    os.path.abspath(
-        os.path.join(DIR, '_extensions')))
+sys.path.insert(
+    0, os.path.abspath(
+        os.path.join(DIR, '_extensions')
+    )
+)
 
 build_dev_doc = False
 if os.path.exists('../odoo/odoo-bin'):
@@ -215,15 +223,15 @@ htmlhelp_basename = 'UnderstandingAccountingForEntrepreneursdoc'
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
-    #'papersize': 'letterpaper',
+    # 'papersize': 'letterpaper',
     'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
-    #'pointsize': '10pt',
+    # 'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     'preamble': r'\usepackage{odoo}',
-    'tableofcontents': r'', # no TOC
+    'tableofcontents': r'',  # no TOC
 
     # output manually in latex docs
     'releasename': '14.0',
@@ -235,25 +243,35 @@ latex_additional_files = ['_static/latex/odoo.sty']
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  # VFE TODO move those files into static folder ?
-  ('user/practical/legal/terms/enterprise_tex', 'odoo_enterprise_agreement.tex', 'Odoo Enterprise Subscription Agreement', '', 'howto'),
-  ('user/practical/legal/terms/partnership_tex', 'odoo_partnership_agreement.tex', 'Odoo Partnership Agreement', '', 'howto'),
-  ('user/practical/legal/terms/terms_of_sale', 'terms_of_sale.tex', 'Odoo Terms of Sale', '', 'howto'),
+    # VFE TODO move those files into static folder ?
+    ('user/practical/legal/terms/enterprise_tex', 'odoo_enterprise_agreement.tex',
+     'Odoo Enterprise Subscription Agreement', '', 'howto'),
+    ('user/practical/legal/terms/partnership_tex',
+        'odoo_partnership_agreement.tex', 'Odoo Partnership Agreement', '', 'howto'),
+    ('user/practical/legal/terms/terms_of_sale',
+        'terms_of_sale.tex', 'Odoo Terms of Sale', '', 'howto'),
 
-  ('user/practical/legal/terms/i18n/enterprise_tex_fr', 'odoo_enterprise_agreement_fr.tex', 'Odoo Enterprise Subscription Agreement (FR)', '', 'howto'),
-  ('user/practical/legal/terms/i18n/partnership_tex_fr', 'odoo_partnership_agreement_fr.tex', 'Odoo Partnership Agreement (FR)', '', 'howto'),
-  ('user/practical/legal/terms/i18n/terms_of_sale_fr', 'terms_of_sale_fr.tex', u'Conditions Générales de Vente Odoo', '', 'howto'),
+    ('user/practical/legal/terms/i18n/enterprise_tex_fr', 'odoo_enterprise_agreement_fr.tex',
+        'Odoo Enterprise Subscription Agreement (FR)', '', 'howto'),
+    ('user/practical/legal/terms/i18n/partnership_tex_fr',
+        'odoo_partnership_agreement_fr.tex', 'Odoo Partnership Agreement (FR)', '', 'howto'),
+    ('user/practical/legal/terms/i18n/terms_of_sale_fr', 'terms_of_sale_fr.tex',
+        u'Conditions Générales de Vente Odoo', '', 'howto'),
 
-  ('user/practical/legal/terms/i18n/enterprise_tex_nl', 'odoo_enterprise_agreement_nl.tex', 'Odoo Enterprise Subscription Agreement (NL)', '', 'howto'),
-  #('user/practical/legal/terms/i18n/partnership_tex_nl', 'odoo_partnership_agreement_nl.tex', 'Odoo Partnership Agreement (NL)', '', 'howto'),
+    ('user/practical/legal/terms/i18n/enterprise_tex_nl', 'odoo_enterprise_agreement_nl.tex',
+        'Odoo Enterprise Subscription Agreement (NL)', '', 'howto'),
+    #('user/practical/legal/terms/i18n/partnership_tex_nl', 'odoo_partnership_agreement_nl.tex', 'Odoo Partnership Agreement (NL)', '', 'howto'),
 
-  ('user/practical/legal/terms/i18n/enterprise_tex_de', 'odoo_enterprise_agreement_de.tex', 'Odoo Enterprise Subscription Agreement (DE)', '', 'howto'),
-  #('user/practical/legal/terms/i18n/partnership_tex_de', 'odoo_partnership_agreement_de.tex', 'Odoo Partnership Agreement (DE)', '', 'howto'),
+    ('user/practical/legal/terms/i18n/enterprise_tex_de', 'odoo_enterprise_agreement_de.tex',
+        'Odoo Enterprise Subscription Agreement (DE)', '', 'howto'),
+    #('user/practical/legal/terms/i18n/partnership_tex_de', 'odoo_partnership_agreement_de.tex', 'Odoo Partnership Agreement (DE)', '', 'howto'),
 
-  ('user/practical/legal/terms/i18n/enterprise_tex_es', 'odoo_enterprise_agreement_es.tex', 'Odoo Enterprise Subscription Agreement (ES)', '', 'howto'),
-  ('user/practical/legal/terms/i18n/partnership_tex_es', 'odoo_partnership_agreement_es.tex', 'Odoo Partnership Agreement (ES)', '', 'howto'),
+    ('user/practical/legal/terms/i18n/enterprise_tex_es', 'odoo_enterprise_agreement_es.tex',
+        'Odoo Enterprise Subscription Agreement (ES)', '', 'howto'),
+    ('user/practical/legal/terms/i18n/partnership_tex_es',
+        'odoo_partnership_agreement_es.tex', 'Odoo Partnership Agreement (ES)', '', 'howto'),
 
-  #('index', 'UnderstandingAccountingForEntrepreneurs.tex', u'Understanding Accounting For Entrepreneurs Documentation', u'fp, xmo', 'manual'),
+    #('index', 'UnderstandingAccountingForEntrepreneurs.tex', u'Understanding Accounting For Entrepreneurs Documentation', u'fp, xmo', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -295,9 +313,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'UnderstandingAccountingForEntrepreneurs', u'Understanding Accounting For Entrepreneurs Documentation',
-   u'fp, xmo', 'UnderstandingAccountingForEntrepreneurs', 'One line description of project.',
-   'Miscellaneous'),
+    ('index', 'UnderstandingAccountingForEntrepreneurs', u'Understanding Accounting For Entrepreneurs Documentation',
+     u'fp, xmo', 'UnderstandingAccountingForEntrepreneurs', 'One line description of project.',
+     'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -319,7 +337,8 @@ todo_include_todos = False
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
-    'werkzeug': ('https://werkzeug.palletsprojects.com/en/1.0.x/', None), # VFE TODO https url for werkzeug
+    # VFE TODO https url for werkzeug
+    'werkzeug': ('https://werkzeug.palletsprojects.com/en/1.0.x/', None),
 }
 
 github_user = 'odoo'
@@ -339,10 +358,7 @@ LANGUAGES = {
     'uk': 'Ukrainian',
     'zh_CN': 'Chinese',
 }
-# monkeypatch PHP lexer to not require <?php
-from sphinx.highlighting import lexers
-from pygments.lexers.web import PhpLexer
-lexers['php'] = PhpLexer(startinline=True)
+
 
 def setup(app):
     app.add_stylesheet('accounting.css')
@@ -377,6 +393,7 @@ def setup(app):
 
     app.connect('doctree-resolved', tag_toctrees)
 
+
 def versionize(app, pagename, templatename, context, doctree):
     """ Adds a version switcher below the menu, requires ``canonical_root``
     and ``versions`` (an ordered, space-separated lists of all possible
@@ -391,11 +408,13 @@ def versionize(app, pagename, templatename, context, doctree):
         if vs != app.config.version
     ]
 
+
 def analytics(app, pagename, templatename, context, doctree):
     if not app.config.google_analytics_key:
         return
 
     context['google_analytics_key'] = app.config.google_analytics_key
+
 
 def tag_toctrees(app, doctree, docname):
     """ Adds a 'toc' metadata entry to all documents containing a toctree node"""
@@ -415,6 +434,7 @@ def tag_toctrees(app, doctree, docname):
 
     app.env.metadata[docname]['has-toc'] = True
 
+
 def localize(app, pagename, templatename, context, doctree):
     """ Adds a language switcher below the menu, requires ``canonical_root``
     and ``languages`` (an ordered, space-separated lists of all possible
@@ -426,14 +446,17 @@ def localize(app, pagename, templatename, context, doctree):
     current_lang = app.config.language or 'en'
     context['language'] = LANGUAGES.get(current_lang, current_lang.upper())
     context['languages'] = [
-        (LANGUAGES.get(la, la.upper()), _build_url(app.config.canonical_root, (la != 'en' and la or ''), pagename))
+        (LANGUAGES.get(la, la.upper()), _build_url(
+            app.config.canonical_root, (la != 'en' and la or ''), pagename))
         for la in app.config.languages.split(',')
         if la != current_lang
     ]
     context['language_codes'] = [
-        (la.split('_')[0] if la != 'en' else 'x-default', _build_url(app.config.canonical_root, (la != 'en' and la or ''), pagename))
+        (la.split('_')[0] if la != 'en' else 'x-default',
+         _build_url(app.config.canonical_root, (la != 'en' and la or ''), pagename))
         for la in app.config.languages.split(',')
     ]
+
 
 def canonicalize(app, pagename, templatename, context, doctree):
     """ Adds a 'canonical' URL for the current document in the rendering
@@ -444,6 +467,7 @@ def canonicalize(app, pagename, templatename, context, doctree):
     """
     if not app.config.canonical_root:
         return
+
 
 def canonicalize(app, pagename, templatename, context, doctree):
     """ Adds a 'canonical' URL for the current document in the rendering
@@ -457,6 +481,7 @@ def canonicalize(app, pagename, templatename, context, doctree):
 
     context['canonical'] = _build_url(
         app.config.canonical_root, app.config.canonical_branch, pagename, lang)
+
 
 def _build_url(root, branch, pagename, lang='en'):
     return "{canonical_url}{canonical_branch}{lang}/{canonical_page}".format(
