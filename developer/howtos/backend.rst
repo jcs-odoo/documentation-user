@@ -1470,7 +1470,7 @@ for editing and merging PO/POT files.
 
    By default Odoo's POT export only extracts labels inside XML files or
    inside field definitions in Python code, but any Python string can be
-   translated this way by surrounding it with the function :func:`odoo._`
+   translated this way by surrounding it with the function :class:`odoo._`
    (e.g. ``_("Label")``)
 
 .. exercise:: Translate a module
