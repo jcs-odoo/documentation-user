@@ -116,26 +116,14 @@
         {% if pagename == master_doc %}
           {% include "jinja_templates/homepage.html" %}
         {% else %}
-          {# If we display the toctree as banners, we use full width page #}
-          {% if 'banners-display' not in meta %}
+          {# VFE TODO arg to display page as full width, without sidebar #}
+          {#}{% if 'banners-display' not in meta %}{#}
             <div class="o_content row">
-              {% if 'has-toc' not in meta and not (pagename in toc) %}
-                <aside>
-                  <div class="navbar-aside text-center">
-                    {{ toc }}
-                    {% if github_link %}
-                      <p class="gith-container">
-                        <a href="{{ github_link(mode='edit') }}" class="gith-link">
-                          Edit on GitHub
-                        </a>
-                      </p>
-                    {% endif %}
-                  </div>
-                </aside>
-              {% endif %}
+                {% include "jinja_templates/sidebar.html" %}
               <article class="doc-body {% if 'has-toc' in meta %}doc-toc{% endif %}{% if pagename in toc%}index-category{% endif %}">
-          {% endif %}
+          {#}{% endif %}{#}
           {% block body %} {% endblock %}
+
           {% if not 'main_toc' in meta and (prev or next) %}
             <p>
             {% if prev %}
@@ -146,10 +134,10 @@
             {% endif %}
             </p>
           {% endif %}
-          {% if 'banners-display' not in meta %}
+          {#}{% if 'banners-display' not in meta %}{#}
             </article>
           </div>
-          {% endif %}
+          {#}{% endif %}{#}
         {% endif %}
         <div id="mask"></div>
       </main>

@@ -1,0 +1,19 @@
+<aside>
+    <div class="navbar-aside text-center">
+        {#}{% set toctree = toctree(maxdepth=5|int, includehidden=True, collapse=False) %}
+        {% if toctree %}
+            {{ toctree }}
+        {% else %}
+            {{ toc }}
+        {% endif %}{#}
+        {{ toc }}
+        {% if github_link %}
+        <p class="gith-container">
+            <a href="{{ github_link(mode='edit') }}" class="gith-link">
+            Edit on GitHub
+            </a>
+        </p>
+        <!-- previous and next pages in the sidebar? (or in body/footer?) -->
+        {% endif %}
+    </div>
+</aside>
