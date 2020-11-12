@@ -264,30 +264,31 @@ class BootstrapTranslator(HTML5Translator):
     def depart_versionmodified(self, node):
         self.body.append(u'</div>')
 
-    def visit_title(self, node):
-        parent = node.parent
-        closing = u'</h3>'
-        if isinstance(parent, nodes.Admonition):
-            self.body.append(self.starttag(node, 'h3', CLASS='alert-title'))
-        elif isinstance(node.parent, nodes.document):
-            self.body.append(self.starttag(node, 'h1'))
-            closing = u'</h1>'
-            self.start_document_title = len(self.body)
-        else:
-            assert isinstance(parent, nodes.section), "expected a section node as parent to the title, found {}".format(parent)
-            if self.first_title:
-                self.first_title = False
-                raise nodes.SkipNode()
-            nodename = 'h{}'.format(self.section_level)
-            self.body.append(self.starttag(node, nodename))
-            closing = u'</{}>'.format(nodename)
-        self.context.append(closing)
-    def depart_title(self, node):
-        self.body.append(self.context.pop())
-        if self.start_document_title:
-            self.title = self.body[self.start_document_title:-1]
-            self.start_document_title = 0
-            del self.body[:]
+    # NOTE: currently hides the main title from the page body (as it is already shown before the main container, on the banner)
+    # def visit_title(self, node):
+    #     parent = node.parent
+    #     closing = u'</h3>'
+    #     if isinstance(parent, nodes.Admonition):
+    #         self.body.append(self.starttag(node, 'h3', CLASS='alert-title'))
+    #     elif isinstance(node.parent, nodes.document):
+    #         self.body.append(self.starttag(node, 'h1'))
+    #         closing = u'</h1>'
+    #         self.start_document_title = len(self.body)
+    #     else:
+    #         assert isinstance(parent, nodes.section), "expected a section node as parent to the title, found {}".format(parent)
+    #         if self.first_title:
+    #             self.first_title = False
+    #             raise nodes.SkipNode()
+    #         nodename = 'h{}'.format(self.section_level)
+    #         self.body.append(self.starttag(node, nodename))
+    #         closing = u'</{}>'.format(nodename)
+    #     self.context.append(closing)
+    # def depart_title(self, node):
+    #     self.body.append(self.context.pop())
+    #     if self.start_document_title:
+    #         self.title = self.body[self.start_document_title:-1]
+    #         self.start_document_title = 0
+    #         del self.body[:]
 
     # the rubric should be a smaller heading than the current section, up to
     # h6... maybe "h7" should be a ``p`` instead?
