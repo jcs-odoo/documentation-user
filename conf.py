@@ -26,7 +26,7 @@ if os.path.exists('../odoo/odoo-bin'):
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '1.2'
+needs_sphinx = '1.6.7'
 
 # Warn all references where target cannot be found
 # but doesn't seem to like Odoo architecture
