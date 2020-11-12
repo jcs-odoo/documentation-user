@@ -1,3 +1,4 @@
+{% if 'has-toc' not in meta and not (pagename in toc) %}
 <aside>
     <div class="navbar-aside text-center">
         {{ toc }}
@@ -11,3 +12,4 @@
         {% endif %}
     </div>
 </aside>
+{% endif %}

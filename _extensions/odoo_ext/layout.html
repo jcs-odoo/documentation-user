@@ -3,10 +3,13 @@
 
 {#}
 {% set classes = [] %}
-{% if pagename == master_doc or 'banners-display' in meta %}
+{% if pagename == master_doc %}
   {% set classes = classes + ['index'] %}
 {% endif %}
 
+<!-- VFE NOTE, the has_code_col logic should probably be retrieved from old design
+  because it is needed for some developer doc pages (and accounting memento?)
+-->
 {% if 'code-column' in meta %}
   {% set classes = classes + ['has_code_col'] %}
 {% endif %}
@@ -122,15 +125,19 @@
     {% else %}
       {% set container = 'container' %}
     {% endif %}
-      <main class="container {{ ' '.join(classes) }}">
+    <main class="container {{ ' '.join(classes) }}">
+      {% if pagename != master_doc %}
         <div class="o_content row">
           {% include "jinja_templates/sidebar.html" %}
           <article class="doc-body {% if 'has-toc' in meta %}doc-toc{% endif %}{% if pagename in toc%}index-category{% endif %}">
-          {% block body %} {% endblock %}
+      {% endif %}
+            {% block body %} {% endblock %}
+      {% if pagename != master_doc %}
           </article>
         </div>
-        <div id="mask"></div>
-      </main>
+      {% endif %}
+      <div id="mask"></div>
+    </main>
   </div>
 
   <footer>
