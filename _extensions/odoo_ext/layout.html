@@ -1,6 +1,7 @@
 {% extends "basic/layout.html" %}
 {% set html5_doctype = True %}
 
+{#}
 {% set classes = [] %}
 {% if pagename == master_doc or 'banners-display' in meta %}
   {% set classes = classes + ['index'] %}
@@ -13,7 +14,9 @@
 {% if 'classes' in meta %}
   {% set classes = classes + meta['classes'].split() %}
 {% endif %}
+{#}
 
+{# VFE TODO investigate this logic and if it's still needed. #}
 {%- block linktags -%}
   {% for code, url in language_codes %}
     <link rel="alternate" hreflang="{{ code }}" href="{{ url }}" />
@@ -22,11 +25,14 @@
   {{ super() }}
 {%- endblock -%}
 
+{#}
 {%- block sidebar1 -%}{%- endblock -%}
 {%- block sidebar2 -%}{%- endblock -%}
 {%- block relbar1 -%}{%- endblock -%}
 {%- block relbar2 -%}{%- endblock -%}
+{#}
 
+{# Google analytics key logic, to keep #}
 {%- block footer -%}
   {%- if google_analytics_key -%}
     <script>
@@ -42,6 +48,7 @@
   {%- endif -%}
 {%- endblock -%}
 
+{#}
 {%- block header -%}
   <header class="o_main_header o_has_sub_nav o_inverted {{ ' '.join(classes) }}">
     {% include "jinja_templates/odoo_header.html" %}
@@ -54,6 +61,7 @@
             </button>
         </div>
 
+        <!-- VFE NOTE this contained -->
         <div class="collapse navbar-collapse" id="o_sub-menu">
           <ol class="o_breadcrumb breadcrumb nav navbar-left">
               {% block breadcrumb_desktop %}
@@ -61,7 +69,6 @@
               {% endblock %}
           </ol>
 
-          <!-- VFE TODO update this part too -->
           <div class="call-to-action navbar-right hidden-xs">
             <a href="https://www.odoo.com/trial" class="btn btn-primary">Start Now</a>
           </div>
@@ -82,7 +89,8 @@
             {% endif %}
 
             {% block sub_menu_desktop %}
-            {% include "jinja_templates/sub-menu_list.html" %}
+              {% include "jinja_templates/sub-menu_list.html" %}
+              {% include "jinja_templates/searchbox.html" %}
             {% endblock %}
 
             {% if languages or versions %}
@@ -95,7 +103,9 @@
   </header>
 
 {%- endblock -%}
+{#}
 
+{#}
 {%- block content -%}
   <div id="wrap" class="{{' '.join(classes) }}">
     {% if meta['banner'] %}
@@ -113,53 +123,18 @@
       {% set container = 'container' %}
     {% endif %}
       <main class="container {{ ' '.join(classes) }}">
-        {% if pagename == master_doc %}
-          {% include "jinja_templates/homepage.html" %}
-        {% else %}
-          {# VFE TODO arg to display page as full width, without sidebar #}
-          {#}{% if 'banners-display' not in meta %}{#}
-            <div class="o_content row">
-                {% include "jinja_templates/sidebar.html" %}
-              <article class="doc-body {% if 'has-toc' in meta %}doc-toc{% endif %}{% if pagename in toc%}index-category{% endif %}">
-          {#}{% endif %}{#}
+        <div class="o_content row">
+          {% include "jinja_templates/sidebar.html" %}
+          <article class="doc-body {% if 'has-toc' in meta %}doc-toc{% endif %}{% if pagename in toc%}index-category{% endif %}">
           {% block body %} {% endblock %}
-
-          {% if not 'main_toc' in meta and (prev or next) %}
-            <p>
-            {% if prev %}
-              <a href="{{ prev.link|e }}" class="text-left">{{ prev.title }}</a>
-            {% endif %}
-            {% if next %}
-              <a href="{{ next.link|e }}" class="text-right">{{ next.title }}</a>
-            {% endif %}
-            </p>
-          {% endif %}
-          {#}{% if 'banners-display' not in meta %}{#}
-            </article>
-          </div>
-          {#}{% endif %}{#}
-        {% endif %}
+          </article>
+        </div>
         <div id="mask"></div>
       </main>
   </div>
 
-  <div class="floating_action_container">
-    <a id="floating_action" class="ripple" href="#">
-      <i class="mdi-action-explore"></i>
-    </a>
-    <div id="floating_action_menu">
-      <span class="bubble"></span>
-      <ul class="list-group content">
-        <!-- VFE FIXME wtf is this kinda lorem ipsum binz ? -->
-        <li class="list-group-item ripple"><a>Cras justo odio</a></li>
-        <li class="list-group-item ripple"><a>Dapibus ac facilisis in</a></li>
-        <li class="list-group-item ripple"><a>Morbi leo risus</a></li>
-        <li class="list-group-item ripple"><a>Porta ac consectetur ac</a></li>
-        <li class="list-group-item ripple"><a>Vestibulum at eros</a></li>
-      </ul>
-    </div>
-  </div>
   <footer>
     {% include "jinja_templates/odoo_footer.html" %}
   </footer>
 {%- endblock -%}
+{#}

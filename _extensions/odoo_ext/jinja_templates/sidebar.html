@@ -1,11 +1,5 @@
 <aside>
     <div class="navbar-aside text-center">
-        {#}{% set toctree = toctree(maxdepth=5|int, includehidden=True, collapse=False) %}
-        {% if toctree %}
-            {{ toctree }}
-        {% else %}
-            {{ toc }}
-        {% endif %}{#}
         {{ toc }}
         {% if github_link %}
         <p class="gith-container">
