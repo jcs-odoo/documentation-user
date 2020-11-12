@@ -135,8 +135,6 @@ pygments_style = 'odoo'
 # a list of builtin themes.
 html_theme = 'odoo_ext'
 
-odoo_cover_default = 'banners/installing_odoo.jpg'
-
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
