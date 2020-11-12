@@ -50,7 +50,6 @@ class BootstrapTranslator(HTML5Translator):
 
         self.config = self.builder.config
         self.highlightlang = self.highlightlang_base = self.builder.config.highlight_language
-        self.highlightopts = getattr(builder.config, 'highlight_options', {})
 
         self.first_param = 1
         self.param_separator = ','
