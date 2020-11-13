@@ -3,6 +3,7 @@ Applications
 ============
 
 .. ORDER (new apps / sections included):
+   baseball
    general
    discuss
    crm
@@ -51,6 +52,7 @@ Applications
 .. toctree::
    :titlesonly:
 
+   baseball
    general
    discuss
    crm
