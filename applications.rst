@@ -3,6 +3,7 @@ Applications
 ============
 
 .. ORDER (new apps / sections included):
+   pastafarian
    general
    discuss
    crm
@@ -51,6 +52,7 @@ Applications
 .. toctree::
    :titlesonly:
 
+   pastafarian
    general
    discuss
    crm
