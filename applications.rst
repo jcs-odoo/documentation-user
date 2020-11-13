@@ -3,7 +3,7 @@ Applications
 ============
 
 .. ORDER (new apps / sections included):
-   general
+      general
    discuss
    crm
    sales
@@ -51,6 +51,7 @@ Applications
 .. toctree::
    :titlesonly:
 
+   newbranch
    general
    discuss
    crm
