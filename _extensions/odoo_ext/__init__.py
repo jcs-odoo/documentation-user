@@ -21,8 +21,8 @@ def setup(app):
                      location="odoo extension")
         app.config.html_translator_class = 'odoo_ext.translator.BootstrapTranslator'
 
-    add_js_file = getattr(app, 'add_js_file', None) or app.add_javascript
-    add_js_file('bootstrap.js')
+    # add_js_file = getattr(app, 'add_js_file', None) or app.add_javascript
+    # add_js_file('bootstrap.js') # now imported through CDN in layout.html
     # for f in ['jquery.min.js', 'bootstrap.js', 'doc.js', 'jquery.noconflict.js']:
     #     add_js_file(f)
 
