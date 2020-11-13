@@ -3,6 +3,7 @@ Applications
 ============
 
 .. ORDER (new apps / sections included):
+   
    general
    discuss
    crm
@@ -51,6 +52,7 @@ Applications
 .. toctree::
    :titlesonly:
 
+   architecture
    general
    discuss
    crm
