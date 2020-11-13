@@ -1,5 +1,5 @@
 =======================
-Odoo User Documentation
+I love chocolate and ice cream!
 =======================
 
 .. rst-class:: index-tree
