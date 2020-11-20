@@ -7,6 +7,10 @@ This extension allows you to:
 
 - Create leads from emails sent to your mailbox.
 - Centralize Prospects' emails into a CRM.
+
+  - title 1
+  - text 2
+
 - Search and store insights on your contacts.
 
 .. image:: media/outlook-extension-overview.png
@@ -137,7 +141,27 @@ Connect to your database
 Pricing
 =======
 
-| *Partner Autocomplete* is an *In-App Purchase (IAP)* service, which requires prepaid credits to be
+The extension is **free** and does not require any purchase to be installed or to create entries in
+your database.
+
+However, this extension provides you with *Lead Enrichment* in the **Company Insights** section.
+This service is part of a paid service named **Lead Generation**.
+
+The extension allows you to test this service for free, even if you don't connect the extension to a
+database. After a while, the extension asks you to buy credits to keep using this additional service.
+
+.. image:: media/outlook-extension-credits-message.png
+   :align: center
+   :alt: "Could not auto-complete the company: not enough credits!" warning message in the Outlook
+         extension
+
+You can disregard this message and keep using the extension for free without *Lead Enrichment* or
+buy more *Lead Generation* credits.
+
+In-App Purchase
+---------------
+
+| *Lead Generation* is an *In-App Purchase (IAP)* service, which requires prepaid credits to be
   used. Each request consumes one credit.
 | To buy credits, go to :menuselection:`Settings --> Contacts --> Partner Autocomplete or Odoo IAP -->
   View My Services` and select a package.
@@ -152,3 +176,6 @@ Pricing
 .. seealso::
    - :doc:`partner_autocomplete`
    - :doc:`../../general/in_app_purchase/in_app_purchase`
+
+
+Here is a :ref:`link to the Configuration section <outlook_extension/configuration>`. Cool right?
